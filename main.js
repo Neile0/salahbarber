@@ -259,7 +259,7 @@ function DateSelected(date) {
 }
 
 function PopulateTimeInput() {
-  resetTimeSelection;
+  resetTimeSelection();
 
   var timeInput = document.getElementById('timeInput');
 
