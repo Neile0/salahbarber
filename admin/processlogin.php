@@ -1,9 +1,9 @@
 <?php
 $path = $_SERVER['DOCUMENT_ROOT'];
-$staffPath = $path ."/admin";
+$adminPath = $path ."/admin";
 
 $dbPath = $path . "/scripts/conn.php";
-$sessionPath = $staffPath . "/session.php";
+$sessionPath = $adminPath . "/session.php";
 require($dbPath);
 require($sessionPath);
 
@@ -16,14 +16,14 @@ $stmt->bind_param("s",$username);
 $stmt->execute();
 $stmt->store_result();
 
-$stmt->bind_result($staffId,$username,$pw);
+$stmt->bind_result($adminId,$username,$pw);
 
 if($stmt->num_rows == 1){
     $stmt->fetch();
     if (password_verify($password,$pw)){
         $_SESSION["auth"] = TRUE;
         $_SESSION["username"] = $username;
-        $_SESSION["staffId"] = $staffId;
+        $_SESSION["adminId"] = $adminId;
         echo 1;
         
         

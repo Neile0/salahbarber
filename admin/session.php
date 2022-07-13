@@ -35,7 +35,7 @@ function confirm_logged_in(){
 function log_out(){
     $_SESSION = [];
     session_destroy();
-    header("Location: /staff/login.php");
+    header("Location: /admin/login.php");
 }
 
 

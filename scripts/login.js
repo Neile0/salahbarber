@@ -1,7 +1,7 @@
 $(document).ready(function(){
-    $("#staff-login-btn").click(function(){
-        var username = $("#staff-login-username").val().trim();
-        var password = $("#staff-login-pwd").val().trim();
+    $("#admin-login-btn").click(function(){
+        var username = $("#admin-login-username").val().trim();
+        var password = $("#admin-login-pwd").val().trim();
 
         if( username != "" && password != "" ){
             $.ajax({
@@ -16,7 +16,7 @@ $(document).ready(function(){
                     }else{
                         msg = "Incorrect username or password!";
                     }
-                    $("#staff-login-msg").html(msg);
+                    $("#admin-login-msg").html(msg);
                 }
             });
         }

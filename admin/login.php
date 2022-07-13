@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salah Michelle | Staff Login </title>
-    <link rel="stylesheet" href="/styles/main.css">
+    <title>Salah Michelle | admin Login </title>
+    <link rel="stylesheet" href="/styles/admin.css">
     <link rel="icon" type="image/svg" href="/images/icons/favicon.svg">
     <script src= 
 "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> 
@@ -13,8 +13,8 @@
 </head>
 <?php 
 $path = $_SERVER['DOCUMENT_ROOT'];
-$staffPath = $path ."/admin";
-$sessionPath = $staffPath . "/session.php";
+$adminPath = $path ."/admin";
+$sessionPath = $adminPath . "/session.php";
 
 require($sessionPath);
 if (logged_in()){
@@ -24,19 +24,19 @@ if (logged_in()){
 
 ?>
 <body>
-    <div class="staff-login bg-white">
-        <div class="staff-login-block">
-            <div class="staff-login-title">
+    <div class="admin-login bg-white">
+        <div class="admin-login-block">
+            <div class="admin-login-title">
                 <h1>Salah Barber</h1>
                 <hr>
             </div>
-            <div class="staff-login-form">
+            <div class="admin-login-form">
               
-                    <input class="staff-login-input " type="text" name="username" id="staff-login-username" placeholder="Username" autofocus autocomplete="off"> 
-                    <input class="staff-login-input" type="password" name="password" id="staff-login-pwd" placeholder="Password" value="">                    
-                    <input class="staff-login-input-submit button bg-accent-one-light" name="login" id="staff-login-btn" type="submit" value="Login">
+                    <input class="admin-login-input " type="text" name="username" id="admin-login-username" placeholder="Username" autofocus autocomplete="off"> 
+                    <input class="admin-login-input" type="password" name="password" id="admin-login-pwd" placeholder="Password" value="">                    
+                    <input class="admin-login-input-submit button bg-accent-one-light" name="login" id="admin-login-btn" type="submit" value="Login">
               
-                <div id="staff-login-msg"></div>
+                <div id="admin-login-msg"></div>
             </div>      
         </div>
     </div>
