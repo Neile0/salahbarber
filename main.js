@@ -21,7 +21,18 @@ window.onload = function () {
   DisplayYear = now.getFullYear();
 
   PopulateCalendar(DisplayMonth, DisplayYear);
+
+  $(function () {
+    $(document).scroll(function () {
+      var $nav = $(".navbar-fixed-top");
+      $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+    });
+  });
 };
+
+$(window).scroll(function(){
+	$('nav').toggleClass('scrolled', $(this).scrollTop() > 50);
+});
 
 function PopulateCalendar(targetMonth = null, targetYear = null) {
   if (targetMonth == null && targetYear == null) {

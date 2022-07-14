@@ -2,6 +2,36 @@ html {
   scroll-behavior: smooth;
 }
 
+.hero{
+
+  min-height: 75vh;
+}
+
+.hero::after{
+  background-image: url('static/background.jpg');
+  background-color: rgba(0, 0, 0, 0.5);
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat;
+  
+  content: "";
+  opacity: 0.7;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+
+.navbar-default{
+  transition:500ms ease;
+  background:transparent;
+}
+.navbar-default.scrolled{
+  background: #fff
+}
+
 .photo-col {
   flex: 25%;
   max-width: 33.3%;
@@ -12,9 +42,7 @@ html {
   margin-top: 8px;
   vertical-align: middle;
   width: 100%;
-
   border-radius: 5px;
-  cursor: pointer;
   transition: 0.3s linear;
 }
 

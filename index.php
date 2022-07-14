@@ -27,9 +27,10 @@ $db->close();
 
   <link rel="stylesheet" href="hero.css" />
   <link rel="stylesheet" href="main.css" />
-  <link rel="icon" href="static/hair1.svg" />
+  <link rel="icon" href="favicon.ico" />
 
-  <title>Salah Barber EK</title>
+  <title>Salah Barber East Kilbride</title>
+  <meta name="description" content="Experienced barber Salah has been serving the East Kilbride area for over 20 years. Now based at Styles and Smiles in The Village East Kilbride. Services by appointment only, phone or book online today!"/>
 </head>
 
 <body style="margin: 0">
@@ -45,7 +46,7 @@ $db->close();
   </div>
 
   <!-- Nav -->
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+  <nav class="navbar navbar-default navbar-expand-lg navbar-light fixed-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="#"><img src="static/hair1.svg" alt="" width="50" height="50" class="d-inline align-text-top" /></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,14 +72,7 @@ $db->close();
   </nav>
 
   <!-- Hero -->
-  <section class="hero d-flex align-items-center justify-content-center" style="
-        background-image: url('static/background.jpg');
-        background-color: rgba(0, 0, 0, 0.5);
-        background-size: cover;
-        background-position: right;
-        background-repeat: no-repeat;
-        min-height: 75vh;
-      ">
+  <section class="hero d-flex align-items-center justify-content-center">
     <div class="container col-xxl-8 px-4 py-5">
       <div class="row flex-lg-row-reverse align-items-center justify-content-center g-5 py-3">
         <div class="col-10 col-sm-8 col-lg-6 hero-image-container">
@@ -158,16 +152,16 @@ $db->close();
     <div class="container col-xxl-8 px-4 py-5">
       <div class="row d-flex flex-wrap p-4">
         <div class="photo-col">
-          <img src="static/gallery/118289232_1247132775636599_5572519517307888563_n.jpg" />
-          <img src="static/gallery/118710656_1978617105602194_2851225122011320351_n.jpg" />
+          <img src="static/gallery/example1.jpg" />
+          <img src="static/gallery/example2.jpg" />
         </div>
         <div class="photo-col">
-          <img src="static/gallery/282704687_725620805258311_4713030477582180268_n.jpg" />
-          <img src="static/gallery/283455001_517001793432603_271097955955343438_n.jpg" />
+          <img src="static/gallery/example3.jpg" />
+          <img src="static/gallery/example4.jpg" />
         </div>
         <div class="photo-col d-md-block d-none">
-          <img src="static/gallery/286121099_686220819150440_3564921985171037407_n.jpg" />
-          <img src="static/gallery/82816007_176362423802985_5067078275050486870_n.jpg" />
+          <img src="static/gallery/example5.jpg" />
+          <img src="static/gallery/example6.jpg" />
         </div>
       </div>
     </div>
