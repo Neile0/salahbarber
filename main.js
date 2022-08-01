@@ -24,14 +24,14 @@ window.onload = function () {
 
   $(function () {
     $(document).scroll(function () {
-      var $nav = $(".navbar-fixed-top");
+      var $nav = $('.navbar-fixed-top');
       $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
     });
   });
 };
 
-$(window).scroll(function(){
-	$('nav').toggleClass('scrolled', $(this).scrollTop() > 50);
+$(window).scroll(function () {
+  $('nav').toggleClass('scrolled', $(this).scrollTop() > 50);
 });
 
 function PopulateCalendar(targetMonth = null, targetYear = null) {
@@ -69,13 +69,13 @@ function setCalendarHeader(month, year) {
 
 function setCalendarBody(month, year) {
   var now = new Date();
+
   var additionalDatesThisMonth = getAvailableDates(month, year);
   var unavailableDatesThisMonth = getUnavailableDates(month, year);
   var workingDays = getWorkingDays();
 
   let iMonth = month - 1;
   let d = new Date(year, iMonth);
-  now.setUTCHours(0, 0, 0, 0);
 
   var table = document.getElementsByClassName('calendar-days');
   Array.from(table).forEach((e) => {
@@ -89,17 +89,14 @@ function setCalendarBody(month, year) {
 
   let dateCutoff = new Date(now);
   dateCutoff.setDate(dateCutoff.getDate() + MIN_DAY_ADVANCE);
+  dateCutoff.setHours(0, 0, 0, 0);
 
+  console.log('Entering loop');
   while (d.getMonth() == iMonth) {
     let added = false;
     let dateValue = d.toLocaleString('en-GB');
 
-    // Date preceeds "now"
-    if (
-      d.getDate() < dateCutoff.getDate() &&
-      d.getMonth() <= dateCutoff.getMonth() &&
-      d.getFullYear() <= dateCutoff.getFullYear()
-    ) {
+    if (d < dateCutoff) {
       tableBody +=
         '<td><button type="button" class="btn btn-link text-decoration-none text-muted p-sm-1 p-0 pe-none" value="' +
         dateValue +
@@ -110,18 +107,11 @@ function setCalendarBody(month, year) {
     }
 
     additionalDatesThisMonth.forEach((e) => {
-      let start = new Date(e[0]);
-      let end = new Date(e[1]);
+      let additionalDate = new Date(e);
 
-      if (
-        d.getDate() >= start.getDate() &&
-        d.getMonth() >= start.getMonth() &&
-        d.getFullYear() >= start.getFullYear() &&
-        d.getDate() <= end.getDate() &&
-        d.getMonth() <= end.getMonth() &&
-        d.getFullYear() <= end.getFullYear() &&
-        !added
-      ) {
+      if (d.getFullYear() === additionalDate.getFullYear() &&
+      d.getMonth() === additionalDate.getMonth() &&
+      d.getDate() === additionalDate.getDate() && !added) {
         tableBody +=
           '<td><button type="button" class="btn btn-outline-warning text-decoration-none text-black p-sm-1 p-0" value="' +
           dateValue +
@@ -136,15 +126,7 @@ function setCalendarBody(month, year) {
       let start = new Date(e[0]);
       let end = new Date(e[1]);
 
-      if (
-        d.getDate() >= start.getDate() &&
-        d.getMonth() >= start.getMonth() &&
-        d.getFullYear() >= start.getFullYear() &&
-        d.getDate() < end.getDate() &&
-        d.getMonth() <= end.getMonth() &&
-        d.getFullYear() <= end.getFullYear() &&
-        !added
-      ) {
+      if (d >= start && d < end && !added) {
         tableBody +=
           '<td><button type="button" class="btn btn-link text-decoration-none text-muted p-sm-1 p-0 pe-none" value="' +
           dateValue +
@@ -366,6 +348,12 @@ function Submit() {
     var modalTitle = document.getElementById('bookingModalTitle');
     modalTitle.innerHTML = 'Book Now';
 
+    var bookingCancel = document.getElementById('bookingCancel');
+    bookingCancel.classList.remove('d-none');
+  
+    var bookingSubmit = document.getElementById('bookingSubmit');
+    bookingSubmit.innerHTML = 'Confirm';
+
     return;
   }
 
@@ -376,20 +364,20 @@ function Submit() {
   _firstName = _firstName.trim().toLowerCase();
   FirstName = _firstName.charAt(0).toUpperCase() + _firstName.slice(1);
 
-  if (FirstName == ""){
+  if (FirstName == '') {
     FirstName = null;
   }
 
   _lastName = _lastName.trim().toLowerCase();
   LastName = _lastName.charAt(0).toUpperCase() + _lastName.slice(1);
 
-  if (LastName == ""){
+  if (LastName == '') {
     LastName = null;
   }
 
   ContactNo = _contactNo.trim();
 
-  if (ContactNo == ""){
+  if (ContactNo == '') {
     ContactNo = null;
   }
 
@@ -405,7 +393,15 @@ function Submit() {
     }
   }
 
-  if (Service == null || Price == null || UserDate == null || Time == null || FirstName == null || LastName == null || ContactNo == null ){
+  if (
+    Service == null ||
+    Price == null ||
+    UserDate == null ||
+    Time == null ||
+    FirstName == null ||
+    LastName == null ||
+    ContactNo == null
+  ) {
     return;
   }
 
@@ -413,7 +409,7 @@ function Submit() {
 
   $.ajax({
     method: 'POST',
-    url: 'scripts/create_new_appointment.php',  
+    url: 'scripts/create_new_appointment.php',
     data: {
       forename: FirstName,
       surname: LastName,
@@ -431,7 +427,6 @@ function Submit() {
 }
 
 function bookingComplete(confirmMessage) {
-  
   Service = null;
   Price = 0;
   UserDate = null;
@@ -453,22 +448,27 @@ function bookingComplete(confirmMessage) {
   _lastName = document.getElementById('lastName');
   _contactNo = document.getElementById('contactNumber');
 
-  _firstName.value = "";
-  _lastName.value = "";
-  _contactNo.value = "";
+  _firstName.value = '';
+  _lastName.value = '';
+  _contactNo.value = '';
 
   var form = document.getElementById('booking-form');
   form.classList.add('d-none');
 
-
-
   var modalTitle = document.getElementById('bookingModalTitle');
-  modalTitle.innerHTML = 'Booking Confirmed';
+  modalTitle.innerHTML = 'Booking Successful ✅';
 
   var bookingConfirm = document.getElementById('bookingConfirm');
-  bookingConfirm.classList.remove("d-none");
+  bookingConfirm.classList.remove('d-none');
+  
+  var bookingCancel = document.getElementById('bookingCancel');
+  bookingCancel.classList.add('d-none');
 
-  var p = document.createElement("p");
+  var bookingSubmit = document.getElementById('bookingSubmit');
+  bookingSubmit.innerHTML = 'Close';
+
+
+  var p = document.createElement('p');
   p.innerHTML = confirmMessage;
 
   bookingConfirm.appendChild(p);
@@ -497,18 +497,11 @@ function getAppointmentTimes(date) {
 }
 
 function getAvailableDates(month, year) {
-  var dateStr = [
-    ['2022-07-19', '2022-07-21'],
-    ['2022-07-23', '2022-07-23'],
-  ];
+  var dateStr = ['2022-09-19'];
 
   var dates = [];
   dateStr.forEach((e) => {
-    var period = [];
-    period.push(new Date(e[0]));
-    period.push(new Date(e[1]));
-
-    dates.push(period);
+    dates.push(new Date(e));
   });
   return dates;
 }
@@ -519,17 +512,13 @@ function getWorkingDays() {
 }
 
 function getUnavailableDates(month, year) {
-  var dateStr = [
-    ['2022-07-22', '2022-07-22'],
-    ['2022-09-22', '2022-09-27'],
-  ];
+  var dateStr = [['2022-09-23', '2022-10-04']];
 
   var dates = [];
   dateStr.forEach((e) => {
     var period = [];
     period.push(new Date(e[0]));
     period.push(new Date(e[1]));
-
     dates.push(period);
   });
   return dates;

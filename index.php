@@ -118,7 +118,7 @@ $db->close();
                 </tr>
                 <tr>
                   <td>Tuesday</td>
-                  <td>9AM - 5PM</td>
+                  <td>9AM - 6PM</td>
                 </tr>
                 <tr>
                   <td>Wednesday</td>
@@ -126,11 +126,11 @@ $db->close();
                 </tr>
                 <tr>
                   <td>Thursday</td>
-                  <td>9AM - 5PM</td>
+                  <td>9AM - 6PM</td>
                 </tr>
                 <tr>
                   <td>Friday</td>
-                  <td>9AM - 5PM</td>
+                  <td>9AM - 6PM</td>
                 </tr>
                 <tr>
                   <td>Saturday</td>
@@ -204,28 +204,14 @@ $db->close();
           </div>
           <div class="modal-body">
             <form id="booking-form" class="needs-validation" novalidate>
-              <div class="mb-3">
-                <label for="serviceInput" class="form-label">Service</label>
-                <select id="serviceInput" class="form-select" aria-label="Select a service" onchange="ServiceSelected(this.value)">
-                  <option selected value="">Select a service</option>
-                  <?php
-                  foreach ($services as list($id, $title, $price)) {
-                    echo "<option value ='$id-$price'>$title (£$price)</option>";
-                  };
-                  ?>
-                </select>
-              </div>
               <div class="mb-4">
                 <label for="dateInput" class="form-label">Date</label>
                 <!-- Insert Calendar -->
                 <div class="row col-7">
                   <div class="calendar-container">
                     <div class="calendar-header d-flex w-100">
-
                     </div>
-
                     <table class="calendar-body table table-fixed text-center">
-
                       <thead>
                         <tr>
                           <td>
@@ -259,6 +245,17 @@ $db->close();
                   <option selected value="">Select a time</option>
                 </select>
               </div>
+              <div class="mb-3">
+                <label for="serviceInput" class="form-label">Service</label>
+                <select id="serviceInput" class="form-select" aria-label="Select a service" onchange="ServiceSelected(this.value)">
+                  <option selected value="">Select a service</option>
+                  <?php
+                  foreach ($services as list($id, $title, $price)) {
+                    echo "<option value ='$id-$price'>$title (£$price)</option>";
+                  };
+                  ?>
+                </select>
+              </div>
               <hr />
               <div class="mb-3">
                 <label for="name" class="form-label">Name for booking</label>
@@ -279,17 +276,15 @@ $db->close();
             <div id="bookingConfirm" class="bookingConfirm d-none" ></div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <button type="button" id="bookingCancel" class="btn btn-secondary" data-bs-dismiss="modal">
               Cancel
             </button>
-            <button type="button" class="btn btn-warning" onclick="Submit()">Confirm</button>
+            <button type="button" id="bookingSubmit" class="btn btn-warning" onclick="Submit()">Confirm</button>
           </div>
         </div>
       </div>
     </div>
   </section>
-
   <script src="main.js"></script>
 </body>
-
 </html>

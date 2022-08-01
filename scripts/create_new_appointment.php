@@ -74,10 +74,14 @@
     $am = date("h:i a", strtotime($start));
     $pm = date("h:i a", strtotime($end));
 
-    $responseString = "Thank you for your booking. Your appointment details are as follows <br><br>$title $d $am - $pm<br><br>Please take note of these details - you will not be able to retrieve them once you click confirm.";
+    $responseString = "Thank you for your booking. Your appointment details are as follows <br><br>$title $d $am - $pm<br><br>Please take note of these details eg. Screenshot as you will not be able to retrieve them after this point.";
     $db->close();  
-    
-  
-   $responseString;
-    
-    echo $responseString;
+     
+    if (!empty($BOOKING_REF)){
+        echo $responseString;
+    }
+    else{
+        echo "Oh no! There was an error. Please try again at another time.";
+    }
+
+

@@ -14,10 +14,17 @@ $startEndTimeSQL = "SELECT start_time, end_time FROM staff_schedule WHERE staff_
 $startEndTimeSQLResults = $db->query($startEndTimeSQL);
 $startEnd = $startEndTimeSQLResults->fetch_all();
 
-foreach($startEnd as list($s, $e)){
+
+$startTime = "09:00:00";
+$endTime = "18:00:00";
+
+
+foreach ($startEnd as list($s, $e)) {
     $startTime = $s;
     $endTime = $e;
 }
+
+
 
 function intervals($intervalstart, $intervalend, $intervalduration)
 {
