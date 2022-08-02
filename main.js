@@ -91,7 +91,6 @@ function setCalendarBody(month, year) {
   dateCutoff.setDate(dateCutoff.getDate() + MIN_DAY_ADVANCE);
   dateCutoff.setHours(0, 0, 0, 0);
 
-  console.log('Entering loop');
   while (d.getMonth() == iMonth) {
     let added = false;
     let dateValue = d.toLocaleString('en-GB');
@@ -124,7 +123,9 @@ function setCalendarBody(month, year) {
 
     unavailableDatesThisMonth.forEach((e) => {
       let start = new Date(e[0]);
+      start.setHours(0,0,0,0);
       let end = new Date(e[1]);
+      end.setHours(0,0,0,0);
 
       if (d >= start && d < end && !added) {
         tableBody +=
